@@ -2,19 +2,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 body {
   font-family: "Poppins", sans-serif;
+  background-color: #fefedf;
+  
 }
 /* ------------------ Top progress Bar ---------------------- */
 .header {
-  /* position: fixed; */
   top: 0;
   z-index: 1;
   width: 100%;
-  
 }
 
-.header h2 {
-  text-align: center;
-}
+
 
 .progress-container {
   width: 100%;
@@ -26,4 +24,13 @@ body {
 .progress-bar {
   height: 0.5em;
   width: 0%;
+}
+/* --------------custom color------------------------ */
+
+.bg-color-1 {
+  background-color: #fefedf;
+}
+/* ----------custom non-important display property----------- */
+.none{
+  display: none;
 }

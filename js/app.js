@@ -14,8 +14,8 @@ const searchBox = () => {
   const searchBox = document.getElementById("search-box").value;
   toggleSpinner("block");
   toggleSearchResult("none");
+  document.getElementById("show-all-btn").style.display = "none";
   loadPhones(searchBox.toLowerCase());
-  console.log(searchBox);
   document.getElementById("search-box").value = "";
   document.getElementById("detail").textContent = "";
 };
@@ -28,19 +28,14 @@ const loadPhones = (searchText) => {
 };
 //-------------------Search Result----------------------------
 const showPhones = (phones) => {
-
   const showDiv = document.getElementById("show");
   showDiv.textContent = "";
-  console.log(phones.length);
-  console.log(phones.slice(0, 20));
-
-  const first20Res = phones.slice(0, 20);
-
+  const first20Result = phones.slice(0, 20);
   if (phones.length === 0) {
     showDiv.innerHTML = `<p class = "text-danger text-center mx-auto">Sorry nothing found</p>`;
     document.getElementById("show-all-btn").style.display = "none";
   } else {
-    first20Res.forEach((phone) => {
+    first20Result.forEach((phone) => {
       const div = document.createElement("div");
       div.classList.add("col");
 
@@ -55,21 +50,22 @@ const showPhones = (phones) => {
             <div class="card-body ">
               <h4 class="card-title">${phone.phone_name}</h4>
               <p class="card-text">brand: ${phone.brand}</p>
-              <button onclick='getId("${phone.slug}")' class="btn btn-dark" >
+              <button onclick='getId("${phone.slug}")' class="btn btn-dark">
               <a class="nav-link text-white" href="#header">Details</a>
-              
                </button>
             </div>
           </div>
     `;
       showDiv.appendChild(div);
-      document.getElementById("show-all-btn").style.display = "block";
+      if (phones.length > 20) {
+        document.getElementById("show-all-btn").style.display = "block";
+      }
     });
   }
   toggleSpinner("none");
   toggleSearchResult("block");
 };
-// -----------Phone ID------------------------------
+// -----------Phone ID fetch------------------------------
 // https://openapi.programming-hero.com/api/phone/${id}
 const getId = (PhoneIds) => {
   toggleSpinner("block");
@@ -82,57 +78,53 @@ const getId = (PhoneIds) => {
 };
 //---------------Detail section---------------------------
 const showDetails = (phoneDetails) => {
-  console.log(phoneDetails.mainFeatures.sensors);
-  phoneDetails.mainFeatures.sensors.forEach(element => {
-    console.log(element)
-  });
-    //mainFeatures.sensors
   const detailsDiv = document.getElementById("detail");
   detailsDiv.textContent = "";
-  const div = document.createElement("div");
-  div.innerHTML = `
-  <div class="container border-dark my-3">
-  <h3 class='text-center'>Product Details</h3>
-    <div class="d-flex flex-row">
-        <div class=" flex-fill p-3">
-            <img
-              class="img-fluid p-3 "
-              src="${phoneDetails.image}"
-              alt="..."
-            />
 
-        </div>
-        <div class=" flex-fill p-3">
-            <h4>${phoneDetails.name} </h4>
-            <p>${
-              phoneDetails.releaseDate
-                ? phoneDetails.releaseDate
-                : "release date not found"
-            }</p>
-            <p><span class='fw-bold'>Storage: </span>${
-              phoneDetails.mainFeatures.storage
-            }</p>
-            <p><span class='fw-bold'>Display: </span>${
-              phoneDetails.mainFeatures.displaySize
-            }</p>
-            <p><span class='fw-bold'>Chipset: </span>${
-              phoneDetails.mainFeatures.chipSet
-            }</p>
-            <p><span class='fw-bold'>Memory:  </span>${
-              phoneDetails.mainFeatures.memory
-            }</p>
-        </div>
-        
-    </div>
-  </div>
- 
- `;
- const sensorDiv = document.createElement('div')
-sensorDiv.innerHTML=`
-<h3 class='text-center'>Sensor</h3>
-`
+  const div = document.createElement("div");
+  div.classList.add("flex-fill");
+  div.classList.add("text-center");
+  div.innerHTML = `
+  <img class='img-fluid p-3'
+    src="${phoneDetails.image}"
+    alt=""
+  />
+  <h3>${phoneDetails.name}</h3>
+  <p>${
+    phoneDetails.releaseDate
+      ? phoneDetails.releaseDate
+      : "release date not found"
+  }</p>
+`;
+  const mainDiv = document.createElement("div");
+  mainDiv.classList.add("flex-fill");
+  mainDiv.classList.add("justify-content-center");
+  // --------------Main Feature----------------------------
+  for ([key, value] of Object.entries(phoneDetails?.mainFeatures)) {
+    const textDiv = document.createElement("div");
+    textDiv.classList.add("flex-fill");
+
+    textDiv.innerHTML = `
+   <p style='word-break: break-all;'><span class='fw-bold'> ${key}:</span> ${value}</p>
+    `;
+    mainDiv.appendChild(textDiv);
+  }
+  console.log(phoneDetails?.others);
+  // -----------------Other feature----------------------------
+  for ([key, value] of Object.entries(
+    phoneDetails.others ? phoneDetails.others : ""
+  )) {
+    console.log(key, ":", value);
+    const textDiv2 = document.createElement("div");
+    textDiv2.classList.add("flex-fill");
+
+    textDiv2.innerHTML = `
+   <p style='word-break: break-all;'><span class='fw-bold'> ${key}:</span> ${value}</p>
+    `;
+    mainDiv.appendChild(textDiv2);
+  }
   detailsDiv.appendChild(div);
-  detailsDiv.appendChild(sensorDiv);
+  detailsDiv.appendChild(mainDiv);
   toggleSpinner("none");
   toggleDetail("block");
 };
@@ -141,7 +133,6 @@ sensorDiv.innerHTML=`
 window.onscroll = function () {
   myFunction();
 };
-
 function myFunction() {
   var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
   var height =

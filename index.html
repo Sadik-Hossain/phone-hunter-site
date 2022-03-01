@@ -14,7 +14,7 @@
     <!--------- Header section -------------------------->
     <header class="d-flex justify-content-center py-3 bg-black">
       <div id="header" class="header">
-        <h1 class="text-center text-light">Phone Finder</h1>
+        <h1 class="text-center color-1">Phone Finder</h1>
         <div class="progress-container bg-black">
           <div class="progress-bar bg-primary rounded-end" id="myBar"></div>
         </div>
@@ -34,7 +34,7 @@
         <div class="input-group-append">
           <button
             onclick="searchBox()"
-            class="input-group-text btn-dark text-light"
+            class="btn btn-outline-dark"
             id="search-btn"
           >
             Search
@@ -54,56 +54,24 @@
       <!----------------Detail Section----------------------->
 
       <div id="toggle-detail" class="container">
-        <div id="details" class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-          <div class="col text-center">
-            <img
-              src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13-pro-max.jpg"
-              alt=""
-            />
-            <h3>iPhone 13 Pro Max</h3>
-            <p>Released 2021, September 24</p>
-          </div>
-          <div class="col text-center">
-            <h3>Main Features</h3>
-            <p>
-              <span class="fw-bold">storage: </span> 128GB/256GB/1TB storage, no
-              card slot
-            </p>
-            <p>
-              <span class="fw-bold">displaySize: </span>6.7 inches, 109.8 cm2
-              (~87.4% screen-to-body ratio)
-            </p>
-            <p><span class="fw-bold">chipSet: </span>Apple A15 Bionic (5 nm)</p>
-            <p>
-              <span class="fw-bold">memory: </span>128GB 6GB RAM, 256GB 6GB RAM,
-              512GB 6GB RAM, 1TB 6GB RAM
-            </p>
-          </div>
-          <div class="col text-center">
-            <h3>Sensors</h3>
-            <p>Face ID</p>
-            <p>accelerometer</p>
-            <p>gyro</p>
-            <p>proximity</p>
-          </div>
-          <div class="col text-center">
-            <h3>others</h3>
-            <p>Face ID</p>
-            <p>accelerometer</p>
-            <p>gyro</p>
-            <p>proximity</p>
-          </div>
-        </div>
+        <div
+          id="detail"
+          class="d-flex justify-content-center flex-column"
+        ></div>
       </div>
 
       <!-------------search result card----------------------->
       <div id="toggle-show">
         <div id="show" class="row row-cols-1 row-cols-md-3 g-4"></div>
-        <div id="show-all-btn" class="text-center my-5 none">
-          <button class="button btn-dark rounded-3 py-2 my-3 px-4">
-            Show All
-          </button>
-        </div>
+      </div>
+      <!----------------- Show All button-------------------->
+      <div id="show-all-btn" class="text-center my-5 none">
+        <button
+          onclick="showPhones()"
+          class="button btn-dark rounded-3 py-2 my-3 px-4"
+        >
+          Show All
+        </button>
       </div>
     </main>
     <!----------------------Script----------------------------->

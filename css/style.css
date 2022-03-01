@@ -1,9 +1,11 @@
+html {
+  scroll-behavior: smooth;
+}
 /* ------------Google Font--------------------------------- */
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 body {
   font-family: "Poppins", sans-serif;
   background-color: #fefedf;
-  
 }
 /* ------------------ Top progress Bar ---------------------- */
 .header {
@@ -11,8 +13,6 @@ body {
   z-index: 1;
   width: 100%;
 }
-
-
 
 .progress-container {
   width: 100%;
@@ -30,7 +30,10 @@ body {
 .bg-color-1 {
   background-color: #fefedf;
 }
+.color-1 {
+  color: #fefedf;
+}
 /* ----------custom non-important display property----------- */
-.none{
+.none {
   display: none;
 }

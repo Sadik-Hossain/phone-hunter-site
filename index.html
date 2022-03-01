@@ -12,11 +12,16 @@
 
   <body>
     <!--------- Header section -------------------------->
-    <header class="d-flex justify-content-center py-2 bg-black">
-      <h1 class="text-center text-light">Phone Finder</h1>
+    <header class="d-flex justify-content-center py-3 bg-black">
+      <div id="header" class="header">
+        <h1 class="text-center text-light">Phone Finder</h1>
+        <div class="progress-container bg-black">
+          <div class="progress-bar bg-primary rounded-end" id="myBar"></div>
+        </div>
+      </div>
     </header>
     <!----------------Search Box---------------------------->
-    <main class="container mx-auto w-100">
+    <main class="container mx-auto w-100 my-5">
       <div class="input-group my-3">
         <input
           id="search-box"
@@ -29,7 +34,7 @@
         <div class="input-group-append">
           <button
             onclick="searchBox()"
-            class="input-group-text"
+            class="input-group-text bg-primary text-light"
             id="search-btn"
           >
             Search
@@ -37,10 +42,22 @@
         </div>
       </div>
       <!----------------Detail Section----------------------->
+
       <div id="detail"></div>
 
       <!-------------search result card----------------------->
       <div id="show" class="row row-cols-1 row-cols-md-3 g-4"></div>
+      <div id="show-all-btn" class="text-center my-5" style="display: none">
+        <button class="button btn-primary rounded-3 py-2 my-3 px-4">
+          Show All
+        </button>
+      </div>
+      <!-------------------spinner---------------------------->
+      <div id="spinner" style="display: none;" class="justify-content-center text-center">
+        <div class="spinner-border mt-5" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
     </main>
     <!----------------------Script----------------------------->
     <script src="./js/bootstrap.bundle.min.js"></script>

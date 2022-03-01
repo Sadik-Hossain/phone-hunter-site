@@ -109,12 +109,10 @@ const showDetails = (phoneDetails) => {
     `;
     mainDiv.appendChild(textDiv);
   }
-  console.log(phoneDetails?.others);
   // -----------------Other feature----------------------------
   for ([key, value] of Object.entries(
     phoneDetails.others ? phoneDetails.others : ""
   )) {
-    console.log(key, ":", value);
     const textDiv2 = document.createElement("div");
     textDiv2.classList.add("flex-fill");
 
